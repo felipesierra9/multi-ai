@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ * Endpoint de diagnóstico: confirma que la API está viva y que
+ * la conexión con MySQL funciona. Se elimina o protege más adelante.
+ */
 @RestController
 @RequestMapping("/api/health")
 public class HealthController {
