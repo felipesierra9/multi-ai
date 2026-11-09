@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: proyecto-final-ds3
+
+  datasource:
+    # Los valores se leen de variables de entorno. Nunca escribas claves reales aquí.
+    url: ${DB_URL:jdbc:mysql://localhost:3306/proyecto_final_ds3?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false}
+    username: ${DB_USER:ds3_user}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      # validate: Hibernate solo comprueba que las tablas coincidan con las entidades.
+      # Las tablas las crearemos con un script SQL propio (Fase 2).
+      ddl-auto: validate
+    open-in-view: false
+
+server:
+  port: 8080
