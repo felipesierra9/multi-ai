@@ -1,20 +1,26 @@
-import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
-import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+export type Role = 'ADMINISTRADOR' | 'CLIENTE';
 
-@NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    VerifyEmailComponent,
-    ForgotPasswordComponent,
-    ResetPasswordComponent,
-  ],
-  imports: [SharedModule, AuthRoutingModule],
-})
-export class AuthModule {}
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface RegisterRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export interface AuthResponse {
+  token: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: Role;
+}
+
+export interface MessageResponse {
+  message: string;
+}

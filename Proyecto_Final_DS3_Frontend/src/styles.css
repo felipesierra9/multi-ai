@@ -80,3 +80,32 @@ a { color: var(--accent); }
   border: 1px solid var(--border);
   border-radius: 12px;
 }
+/* ---------- Formularios y botones ---------- */
+form { display: flex; flex-direction: column; gap: 6px; }
+label { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; font-size: .9rem; color: var(--muted); }
+input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+}
+input:focus { outline: 2px solid var(--accent); }
+.error { color: #ff7b7b; }
+.btn {
+  margin-top: 16px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+.btn-small { margin: 0; padding: 6px 12px; font-size: .85rem; }
+.alert { margin-top: 12px; padding: 10px 12px; border-radius: 8px; font-size: .9rem; }
+.alert-error { background: #3b1620; border: 1px solid #7a2a3a; color: #ffb3b3; }
+.alert-ok { background: #12301f; border: 1px solid #2a6b44; color: #b8f0cf; }
+.navbar-user { display: flex; align-items: center; gap: 12px; }
