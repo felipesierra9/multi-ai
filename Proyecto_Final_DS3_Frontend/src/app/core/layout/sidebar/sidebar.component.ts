@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,15 +16,19 @@ import { Component } from '@angular/core';
       <a routerLink="/dashboard/history" routerLinkActive="active">Historial</a>
       <a routerLink="/dashboard/profile" routerLinkActive="active">Perfil</a>
 
-      <div class="section">Administración</div>
-      <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-        >Panel admin</a
-      >
-      <a routerLink="/admin/users" routerLinkActive="active">Usuarios</a>
-      <a routerLink="/admin/audit" routerLinkActive="active">Auditoría</a>
-      <a routerLink="/admin/statistics" routerLinkActive="active">Estadísticas</a>
-      <a routerLink="/admin/reports" routerLinkActive="active">Reportes</a>
+      @if (auth.hasRole('ADMINISTRADOR')) {
+        <div class="section">Administración</div>
+        <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+          >Panel admin</a
+        >
+        <a routerLink="/admin/users" routerLinkActive="active">Usuarios</a>
+        <a routerLink="/admin/audit" routerLinkActive="active">Auditoría</a>
+        <a routerLink="/admin/statistics" routerLinkActive="active">Estadísticas</a>
+        <a routerLink="/admin/reports" routerLinkActive="active">Reportes</a>
+      }
     </nav>
   `,
 })
-export class SidebarComponent {}
+export class SidebarComponent {
+  auth = inject(AuthService);
+}

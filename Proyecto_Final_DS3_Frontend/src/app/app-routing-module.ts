@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './core/layout/main-layout/main-layout.component';
+import { authGuard } from './core/guards/auth.guard';
+import { roleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -11,10 +13,11 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
 
-  // Pantallas internas (con navbar, sidebar y footer)
+  // Pantallas internas: requieren sesión
   {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'dashboard',
@@ -22,6 +25,8 @@ const routes: Routes = [
       },
       {
         path: 'admin',
+        canActivate: [roleGuard],
+        data: { role: 'ADMINISTRADOR' },
         loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule),
       },
     ],
