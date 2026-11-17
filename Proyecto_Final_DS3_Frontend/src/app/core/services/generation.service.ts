@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import {
-  GenerationRequest, GenerationResponse, ProviderResult
+  GenerationRequest, GenerationResponse, GenerationSummary, ProviderResult
 } from '../models/generation.models';
 import { MockGenerationBackend } from './mock-generation.backend';
 
@@ -19,6 +19,13 @@ export class GenerationService {
     return environment.useMock
       ? this.mock.create(request)
       : this.http.post<GenerationResponse>(this.baseUrl, request);
+  }
+
+  /** GET /api/generations -> historial del usuario autenticado. */
+  list(): Observable<GenerationSummary[]> {
+    return environment.useMock
+      ? this.mock.list()
+      : this.http.get<GenerationSummary[]>(this.baseUrl);
   }
 
   /** GET /api/generations/{id}/results -> estado actual de cada proveedor. */

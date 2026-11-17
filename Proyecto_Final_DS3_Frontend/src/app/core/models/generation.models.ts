@@ -26,3 +26,14 @@ export interface GenerationResponse {
   mediaType: MediaType;
   results: ProviderResult[];
 }
+
+/** Fila del historial: una generación con su conteo de resultados. */
+export interface GenerationSummary {
+  id: number;
+  prompt: string;
+  mediaType: MediaType;
+  createdAt: string;
+  completedCount: number;
+  totalCount: number;
+  simulated?: boolean;
+}

@@ -1,5 +1,7 @@
 ﻿import { Observable, of } from 'rxjs';
-import { GenerationRequest, GenerationResponse, MediaType, ProviderResult } from '../models/generation.models';
+import {
+  GenerationRequest, GenerationResponse, GenerationSummary, MediaType, ProviderResult
+} from '../models/generation.models';
 
 /**
  * MODO SIMULADO (solo para desarrollar la interfaz sin backend).
@@ -47,6 +49,24 @@ export class MockGenerationBackend {
 
   getResults(id: number): Observable<ProviderResult[]> {
     return of(this.build(id));
+  }
+
+  /** Historial: solo las generaciones hechas en esta sesión (en memoria). */
+  list(): Observable<GenerationSummary[]> {
+    const items: GenerationSummary[] = [];
+    this.generations.forEach((gen, id) => {
+      const results = this.build(id);
+      items.push({
+        id,
+        prompt: gen.prompt,
+        mediaType: gen.mediaType,
+        createdAt: new Date(gen.startedAt).toISOString(),
+        completedCount: results.filter(r => r.status === 'COMPLETED').length,
+        totalCount: results.length,
+        simulated: true
+      });
+    });
+    return of(items.sort((a, b) => b.id - a.id));
   }
 
   private build(id: number): ProviderResult[] {

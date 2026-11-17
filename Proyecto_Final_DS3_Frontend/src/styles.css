@@ -232,3 +232,65 @@ textarea:focus { outline: 2px solid var(--accent); }
 .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .modal-body img, .modal-body video { max-width: 100%; border-radius: 8px; }
 '@ | Add-Content -Path src/styles.css -Encoding utf8
+@'
+
+/* ---------- Panel admin y gráficas (F6a) ---------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.stat-card strong { font-size: 1.4rem; word-break: break-word; }
+
+.filters-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+.filters-form label { margin-top: 0; }
+.filters-form__actions { display: flex; gap: 8px; }
+.filters-form__actions .btn { margin: 0; }
+.btn-secondary { background: var(--border); }
+input:disabled { opacity: .5; cursor: not-allowed; }
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 900px) { .charts-grid { grid-template-columns: 1fr; } }
+
+.chart {
+  padding: 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.chart h3 { margin: 0 0 12px; font-size: 1rem; }
+
+.chart-v { display: flex; gap: 4px; align-items: flex-end; overflow-x: auto; }
+.chart-v__col { flex: 1; min-width: 28px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.chart-v__area { height: 140px; width: 100%; display: flex; align-items: flex-end; }
+.chart-v__bar { width: 100%; min-height: 2px; background: var(--accent); border-radius: 4px 4px 0 0; }
+.chart-v__value { font-size: .7rem; color: var(--muted); }
+.chart-v__label { font-size: .65rem; color: var(--muted); }
+
+.chart-h { display: flex; flex-direction: column; gap: 10px; }
+.chart-h__row { display: grid; grid-template-columns: 110px 1fr 40px; gap: 8px; align-items: center; }
+.chart-h__label { font-size: .85rem; }
+.chart-h__track { height: 14px; background: var(--bg); border-radius: 7px; overflow: hidden; }
+.chart-h__bar { height: 100%; background: var(--accent); border-radius: 7px; }
+.chart-h__value { font-size: .85rem; text-align: right; }
+'@ | Add-Content -Path src/styles.css -Encoding utf8
